@@ -8,7 +8,7 @@ from urllib.parse import urlencode
 
 class Zoho:
     """
-    Todo: endpoint --> base URL
+    Todo: endpoint --> base URL (or URL?)
     """
 
     def __init__(self, zoho_auth_path):

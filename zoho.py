@@ -366,24 +366,3 @@ class Zoho:
         query = {"limit": 50}
         history = self._paginate(endpoint, query)       
         return history
-    
-
-    def write_ticket_history_to_csv(self, destination_path, history):
-
-        with open(destination_path, "w", newline='', encoding='utf-8') as outfile:
-
-            csvoutfile = csv.writer(outfile, quoting=csv.QUOTE_ALL)
-
-            # Write header to file
-            header_row = ["eventTime","eventName","eventInfo", "actor", "actorInfo", "source"]    
-            csvoutfile.writerow(header_row)
-
-            for event in history:
-                row = []
-                row.append(event.get("eventTime"))
-                row.append(event.get("eventName"))
-                row.append(event.get("eventInfo"))
-                row.append(event.get("actor"))
-                row.append(event.get("actorInfo"))
-                row.append(event.get("source"))
-                csvoutfile.writerow(row)

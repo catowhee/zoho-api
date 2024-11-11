@@ -340,16 +340,6 @@ class Zoho:
         row.append(convo.get("bcc"))
         row.append(convo.get("attachments"))     
         outfile.writerow(row)
-    
-    def write_task_comment_to_csv(self, outfile, comment):
-        row = []
-        row.append("'" + comment.get("id")) # Format char for Excel
-        row.append(comment.get("contentType"))    
-        row.append(comment.get("commentedTime"))
-        row.append(comment.get("content")[:30000])    
-        row.append(comment.get("commenter").get("email")) 
-        row.append(comment.get("attachments"))    
-        outfile.writerow(row)
         
     def get_ticket_attachments(self, ticket_id):
         endpoint = f"https://desk.zoho.com/api/v1/tickets/{ticket_id}/attachments"

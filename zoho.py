@@ -226,16 +226,19 @@ class Zoho:
     def get_task_comment(self, task_id, comment_id):
         endpoint = f"https://desk.zoho.com/api/v1/tasks/{task_id}/comments/{comment_id}?include=mentions"
         status_code, content = self._base_api_call("GET", endpoint)
+        
+        # Replace "zsu" agent tags with the agent name
+        # This can be done for other mention types if needed        
+        content["content"] = self._replace_mention_tags(content)
+
+        return status_code, content
+
 
     def get_organization_fields(self, module):
         endpoint = f"https://desk.zoho.com/api/v1/organizationFields?module={module}"    
         return self._base_api_call('GET', endpoint)
 
-        # Replace "zsu" agent tags with the agent name
-        # This can be done for other mention types if needed        
-        content["content"] = self._replace_mention_tags(content)
 
-        return (status_code, content)
     
     def _replace_mention_tags(self, content):
         if content.get("mention") is not None:

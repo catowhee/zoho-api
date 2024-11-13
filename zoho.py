@@ -325,21 +325,6 @@ class Zoho:
             details["author_photo"] = content.get("author", {}).get("photoURL")
       
         return details
-
-    def write_convo_to_csv(self, outfile, convo):
-        row = []
-        row.append("'" + convo.get("id")) # Formatting char for Excel
-        row.append(convo.get("type"))
-        row.append(convo.get("created_time"))
-        row.append(convo.get("modified_time"))
-        row.append(convo.get("content")[:30000])
-        row.append(convo.get("commenter"))
-        row.append(convo.get("from"))
-        row.append(convo.get("to"))
-        row.append(convo.get("cc"))
-        row.append(convo.get("bcc"))
-        row.append(convo.get("attachments"))     
-        outfile.writerow(row)
         
     def get_ticket_attachments(self, ticket_id):
         endpoint = f"https://desk.zoho.com/api/v1/tickets/{ticket_id}/attachments"

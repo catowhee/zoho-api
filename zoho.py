@@ -153,7 +153,7 @@ class Zoho:
             elif 400 <= status_code < 600: # temp for recycle bin download
                 break
 
-            if len(content["data"]) < 100:
+            if len(content["data"]) < query['limit']:
                 break
             else:
                 from_ = int(query["from"]) + int(query["limit"])

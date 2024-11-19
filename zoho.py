@@ -233,13 +233,15 @@ class Zoho:
 
         return status_code, content
 
-
     def get_organization_fields(self, module):
         endpoint = f"https://desk.zoho.com/api/v1/organizationFields?module={module}"    
         return self._base_api_call('GET', endpoint)
-
-
     
+    def bulk_close_tickets(self, payload):
+        endpoint = "https://desk.zoho.com/api/v1/closeTickets"
+        # todo: validate ticket_ids
+        return self._base_api_call("POST", endpoint, payload)
+
     def _replace_mention_tags(self, content):
         if content.get("mention") is not None:
             mentions = content.get("mention")
@@ -250,7 +252,6 @@ class Zoho:
                     content["content"] = content["content"].replace(replace, replace_with)
         return content["content"]
 
-    
     @check_token
     def download_attachment(self, attachment, output_dir):
   
@@ -299,6 +300,8 @@ class Zoho:
         #query = {"sortBy": "-commentedTime","limit": 100}
         results = self._paginate(endpoint, query, results_limit)       
         return results
+    
+
 
     def get_convo_details(self, ticket_id, convo_id, convo_type):
 
